@@ -1,45 +1,51 @@
-Karma runs on [Node.js] and is available as an [npm] package.
+* Karma
+  * 💡runs | ALL [Node.js] LTS releases 💡
+  * 👀-- AVAILABLE as -- [npm] package 👀
 
-## Installing Node.js
+## Requirements
 
-On Mac or Linux we recommend using [NVM](https://github.com/creationix/nvm). On Windows, download Node.js
-from [the official site](https://nodejs.org/) or use the [NVM PowerShell Module](https://www.powershellgallery.com/packages/nvm).
-
-Karma works on all [LTS releases](https://nodejs.org/en/about/releases/) of Node.js.
+* install Node.js
+  * | Mac or Linux,
+    * recommended to use [NVM](https://github.com/creationix/nvm)
+  * | Windows,
+    * [download Node.js | official site](https://nodejs.org/) or
+    * use [NVM PowerShell Module](https://www.powershellgallery.com/packages/nvm)
 
 ## Installing Karma and plugins
 
-The recommended approach is to install Karma (and all the plugins your project needs) locally in
-the project's directory.
+* 
 
-```bash
-# Install Karma:
-$ npm install karma --save-dev
+    ```bash
+    # Install Karma:
+    $ npm install karma --save-dev
+    
+    # Install Karma's plugins / needed by your project
+    $ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
+    ```
+  * install 
+    * Karma
+    * ALL Karma's plugins / needed by your project
 
-# Install plugins that your project needs:
-$ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
+* 
 
-```
+    ```bash
+    # Run Karma:
+    $ ./node_modules/karma/bin/karma start
+    ```
+  * == use Karma CLI
 
-This will install `karma`, `karma-jasmine`, `karma-chrome-launcher` and `jasmine-core` packages into `node_modules` in your current
-working directory and also save these as `devDependencies` in `package.json`, so that any
-other developer working on the project will only have to do `npm install` in order to get all these
-dependencies installed.
+## CLI
 
-```bash
-# Run Karma:
-$ ./node_modules/karma/bin/karma start
-```
+* |
+  * Linux or Mac,
+    ```
+    ./node_modules/karma/bin/karma start
+    ```
+  * Windows 
 
-## Commandline Interface
-Typing `./node_modules/karma/bin/karma start` sucks and so you might find it useful to install `karma-cli` globally. You will need to do this if you want to run Karma on Windows from the command line.
-
-```bash
-$ npm install -g karma-cli
-```
-
-Then, you can run Karma simply by `karma` from anywhere and it will always run the local version.
-
+      ```bash
+      $ npm install -g karma-cli
+      ```
 
 [Node.js]: https://nodejs.org/
 [npm]: https://www.npmjs.com/package/karma
