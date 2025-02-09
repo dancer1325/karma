@@ -3,31 +3,36 @@ pageTitle: Frequently Asked Questions
 menuTitle: FAQ
 ---
 
-The list below is a collection of common questions regarding Karma and its use.
-If you have any other questions in mind, please visit the [mailing list] to let the community know.
+### Can I use Karma + testing framework X?
+* Yes
+* | MOST of the common testing frameworks (Jasmine, Mocha, QUnit)
+  * there are plugins
 
+### Can I use Karma -- for -- E2E testing?
+* Karma
+  * 's primary goal == unit testing 
+* | AngularJS app
+  * 's unit testing
+    * use Karma + [karma-ng-scenario] plugin
+  * 's E2E testing
+    * use [Protractor] 
 
-### Can I use Karma with testing framework X?
-Yes. There are plugins for most of the common testing frameworks (such as Jasmine, Mocha, QUnit).
-If there is no plugin for the testing framework you like, go ahead and write one. It is simple -
-you can start by looking into the source code of the existing ones.
-
-
-### Can I use Karma to do end to end testing?
-Karma has primarily been designed for low level (unit) testing. If it's an AngularJS app, you can
-use Karma with the [karma-ng-scenario] plugin. However, we recommend [Protractor] for high-level testing.
-
-
-### Can I use Karma on Continuous Integration server ?
-Of course! Check out the docs for [Jenkins], [Semaphore], [TeamCity] or [Travis].
-
+### Can I use Karma | Continuous Integration server ?
+* se
+  * [Jenkins],
+  * [Semaphore],
+  * [TeamCity]
+  * [Travis]
 
 ### Which version of Karma should I use?
-The latest stable version from npm (`npm install karma`). See [versioning] for more detailed information about Karma's release channels.
-
+* latest stable version
+  * == `npm install karma`
 
 ### Which version of Node.js does Karma run with?
-Karma works on all LTS versions of Node.js as specified by the [Node.js Release Working Group](https://github.com/nodejs/Release/blob/master/README.md). The Node.js version numbers are set in the package.json. Older versions of karma work with older versions of Node.js, but are not maintained or updated.
+* | ALL LTS versions of Node.js
+  * see [Node.js Release Working Group](https://github.com/nodejs/Release/blob/master/README.md)
+* | OLDER versions of karma,
+  * older versions of Node.js / NOT maintained or updated
 
 [mailing list]: https://groups.google.com/d/forum/karma-users
 [karma-ng-scenario]: https://github.com/karma-runner/karma-ng-scenario
