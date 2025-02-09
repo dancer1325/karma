@@ -89,6 +89,7 @@
   * supported on
     * [Socket.io]
     * [Node.js]
+  * originates -- from a -- [university thesis]
 
 ## License
 * [MIT License](./LICENSE)
@@ -106,3 +107,4 @@
 [@JsKarma]: https://twitter.com/JsKarma
 [RequireJS]: https://requirejs.org/
 [Istanbul]: https://github.com/gotwarlost/istanbul
+[university thesis]: https://github.com/karma-runner/karma/raw/master/thesis.pdf
