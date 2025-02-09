@@ -1,124 +1,97 @@
 # Karma
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/karma-runner/karma) [![npm version](https://img.shields.io/npm/v/karma.svg?style=flat-square)](https://www.npmjs.com/package/karma) [![npm downloads](https://img.shields.io/npm/dm/karma.svg?style=flat-square)](https://npmcharts.com/compare/karma?minimal=true)
 
- [![Code Climate](https://img.shields.io/codeclimate/maintainability/karma-runner/karma)](https://codeclimate.com/github/karma-runner/karma) [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com/) [![Dependency Status](https://img.shields.io/david/karma-runner/karma.svg?style=flat-square)](https://david-dm.org/karma-runner/karma) [![devDependency Status](https://img.shields.io/david/dev/karma-runner/karma.svg?style=flat-square)](https://david-dm.org/karma-runner/karma#info=devDependencies) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+* := simple tool /
+  * allows
+    * 👀execute JavaScript code | MULTIPLE _real_ browsers 👀
+      * [supported browsers](/docs/config/03-browsers.md)
+  * 's goal
+    * test-driven development
+      * easy,
+      * fast,
+      * fun
+  * !=
+    * testing framework
+    * assertion library
 
-A simple tool that allows you to execute JavaScript code in multiple
-_real_ browsers.
+## ⚠️Karma is deprecated & NOT accept NEW features or GENERAL bug fixes ⚠️
 
-> The main purpose of Karma is to make your test-driven development easy,
->  fast, and fun.
+* Reason: 🧠
+  * SINCE Karma's creation ([10+ years](https://testing.googleblog.com/2012/11/testacular-spectacular-test-runner-for.html)),  
+    * web testing space has evolved
+      * NEW patterns & tools
+      * NEW test runners / MORE performant alternatives
+  * | NOW,
+    * Karma NO provides clear unique value 🧠
 
-## Karma is deprecated and is not accepting new features or general bug fixes.
+* uses of Karma
+  * 👀Angular ecosystem 👀
+    * Angular -- is adding (see [Angular blog](https://blog.angular.io/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca)) -- 
+      * [Jest](https://jestjs.io/)
+      * [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/)
+    * | [NOW, Angular CLI's Web Test Runner supported is stable +1 year]
+      * ⚠️ONLY CRITICAL security issues fixed ⚠️ 
+  * outside Angular
+    * migrate to alternatives
+      * browser-based 
+        * [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/)
+        * [`jasmine-browser-runner`](https://github.com/jasmine/jasmine-browser-runner) 
+      * Node-based
+        * [Jest](https://jestjs.io/)
+        * [Vitest](https://vitest.dev/) 
 
-The web testing space has evolved significantly in the [10+ years](https://testing.googleblog.com/2012/11/testacular-spectacular-test-runner-for.html) since Karma's creation. The web landscape looks very different today and new patterns and tools have emerged in the ecosystem. New test runners offer more performant alternatives, and Karma no longer provides clear unique value.
+## Documentation
 
-Based on the current state of the web testing ecosystem, we have made the hard decision to deprecate Karma.
+* [docs](/docs)
 
-We know Karma is used particularly commonly in the Angular ecosystem, so Angular is adding [Jest](https://jestjs.io/) and [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/) support to provide a migration path off of Karma. See the [Angular blog](https://blog.angular.io/moving-angular-cli-to-jest-and-web-test-runner-ef85ef69ceca) for more details.
+## Communication -- Help and Support
 
-Critical security issues in Karma will still be triaged and fixed as necessary. This will continue until 12 months after Angular CLI's Web Test Runner support is marked stable.
-
-For those outside Angular looking to migrate off Karma, both [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/) and [`jasmine-browser-runner`](https://github.com/jasmine/jasmine-browser-runner) provide browser-based unit testing solutions which can be used as a direct alternative. [Jest](https://jestjs.io/) and [Vitest](https://vitest.dev/) also provide Node-based alternatives.
-
-It has been incredible to see Karma's impact on the web testing ecosystem and we greatly appreciate the support of everyone who contributed to an awesome community. Keep testing. ✅
-
-
-## Help and Support
-
-> For questions and support please use the mailing list or Gitter.
-> The issue tracker is for bug reports and feature discussions only.
-
-* Obligatory [documentation]
 * Quick questions:
 [![Gitter Chat](https://img.shields.io/badge/GITTER-join%20chat-green.svg?style=flat-square)](https://gitter.im/karma-runner/karma)
 * Longer questions: [Mailing List]
 * Bug reports [Issue Tracker]
 * Everything less than 140 characters: [@JsKarma] on Twitter
 
+## Use cases
 
+* test code | 
+  * *real* browsers
+  * MULTIPLE browsers (desktop, mobile, tablets, etc.).
+  * locally
+  * CI server
+  * EVERY save
+* generate -- via [Istanbul] -- coverage reports
+* | your source files
+  * use [RequireJS] 
 
-## When should I use Karma?
+## How does it work?
 
-* You want to test code in *real* browsers.
-* You want to test code in multiple browsers (desktop, mobile,
-  tablets, etc.).
-* You want to execute your tests locally during development.
-* You want to execute your tests on a continuous integration server.
-* You want to execute your tests on every save.
-* You love your terminal.
-* You don't want your (testing) life to suck.
-* You want to use [Istanbul] to automagically generate coverage
-  reports.
-* You want to use [RequireJS] for your source files.
+* Karma 
+  * -- launches an -- HTTP server
+  * -- generates the -- test runner HTML file / 
+    * -- used via -- dedicated testing framework's plugins
+      * [Jasmine]
+      * [Mocha]
+      * [QUnit]
+      * [many others](https://www.npmjs.com/search?q=keywords:karma-adapter)
 
+## Origin
 
-## But I still want to use \_insert testing library\_
+* | [AngularJS] development
+  * originally, [JSTD] used
+    * MANY problems
+* Karma
+  * == own test runner / 
+  * 's idea
+    * == JSTD's idea
+    * execute JavaScript tests 
+      * stable
+      * fast
+  * supported on
+    * [Socket.io]
+    * [Node.js]
 
-Karma is not a testing framework, nor an assertion library.
-Karma just launches an HTTP server, and generates the test runner HTML file you probably already know from your favourite testing framework.
-So for testing purposes you can use pretty much anything you like. There are already plugins for most of the common testing frameworks:
-
-* [Jasmine]
-* [Mocha]
-* [QUnit]
-* and [many others](https://www.npmjs.com/search?q=keywords:karma-adapter)
-
-If you can't find an adapter for your favourite framework, don't worry and write your own.
-It's not that hard and we are here to help.
-
-
-## Which Browsers can I use?
-
-All the major browsers are supported, if you want to know more see the
-[browsers] page.
-
-
-## Troubleshooting
-See [FAQ](https://karma-runner.github.io/latest/intro/faq.html).
-
-
-## I want to use it. Where do I sign?
-
-You don't need to sign anything but here are some resources to help
-you to get started...
-
-
-### Obligatory Screencast.
-
-Every serious project has a screencast, so here is ours.  Just click
-[here] and let the show begin.
-
-
-### Installation.
-
-See [installation](https://karma-runner.github.io/latest/intro/installation.html).
-
-
-### Using it.
-
-See [configuration](https://karma-runner.github.io/latest/intro/configuration.html).
-
-
-## This is so great. I want to help.
-
-Please, see
-[contributing](https://karma-runner.github.io/latest/dev/contributing.html).
-
-
-## Why did you create this?
-
-Throughout the development of [AngularJS], we've been using [JSTD] for
-testing. I really think that JSTD is a great idea. Unfortunately, we
-had many problems with JSTD, so we decided to write our own test
-runner based on the same idea. We wanted a simple tool just for
-executing JavaScript tests that is both stable and fast. That's why we
-use the awesome [Socket.io] library and [Node.js].
-
-
-## My boss wants a license. So where is it?
-[MIT License](./LICENSE)
-
+## License
+* [MIT License](./LICENSE)
 
 [AngularJS]: https://angularjs.org/
 [JSTD]: https://code.google.com/p/js-test-driver/
@@ -133,6 +106,3 @@ use the awesome [Socket.io] library and [Node.js].
 [@JsKarma]: https://twitter.com/JsKarma
 [RequireJS]: https://requirejs.org/
 [Istanbul]: https://github.com/gotwarlost/istanbul
-
-[browsers]: https://karma-runner.github.io/latest/config/browsers.html
-[documentation]: https://karma-runner.github.io
