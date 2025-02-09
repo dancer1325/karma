@@ -1,42 +1,49 @@
-Karma is essentially a tool which spawns a web server that executes source code against test code for each of the browsers connected.
-The results of each test against each browser are examined and displayed via the command line to the developer
-such that they can see which browsers and tests passed or failed.
+* Karma
+  * == tool / spawns a web server /
+    * executes source code | test code 
+      * / EACH connected browser
+        * 's results -- are displayed -- | CL
+      * & watch ALL files / specified | Karma's configuration file
+        * -- via sending a -- signal | testing server
 
-A browser can be captured either
-- manually, by visiting the URL where the Karma server is listening (typically `http://localhost:9876/`),
-- or automatically by letting Karma know which browsers to start when Karma is run (see [browsers]).
+* steps
+  * EACH connected browser -- loads the -- source files | IFrame
+  * Karma executes source code | test code
+  * EACH connected browser -- reports the results -- back to the server
 
-Karma also watches all the files, specified within the configuration file, and whenever any file changes, it triggers the test run by
-sending a signal to the testing server to inform all of the captured browsers to run the test code again.
-Each browser then loads the source files inside an IFrame, executes the tests and reports the results back to the server.
 
-The server collects the results from all of the captured browsers and presents them to the developer.
+* ways to capture a browser
+  * manually -- by visiting the -- URL | Karma server is listening (by default, `http://localhost:9876/`)
+  * automatically -- by setting -- Karma browsers | start
+    * see [browsers](../config/03-browsers.md)
 
-This is only a very brief overview, as the internals of how Karma works aren't entirely necessary when using Karma.
+## Karma's workflow
 
-## Outline of workflow.
+* | AFTER Karma starting up, 
+  * Karma 
+    * loads 
+      * plugins
+        * -> test reporters -- register for -- 'browser' events / ready for test results
+      * configuration file,
+    * starts its local web server / listens for connections
+      * -> ANY browser ALREADY waiting | server's websockets -> will reconnect IMMEDIATELY 
+    * launches >= 0 browsers / their start page == Karma server URL
+    * | AFTER browsers connect,
+      * Karma -- serves a -- 'client.html' page 
+      * if browser | 'client.html' -> connects -- via websockets, back to the -- server -> server -- over the websocket, instructs the client to -- execute tests  
+* TODO: The client page opens an iframe with a 'context.html' page from the server.
+The server generates this context.html page using the configuration.
+This page includes the test framework adapter, the code to be tested, and the test code.
 
-Here is roughly how Karma works:
+When the browser loads this context page, the onload event handler connects the context page to the client page via postMessage. 
+The framework adapter is in charge at this point: it runs the test, reporting errors or success by messaging through the client page.
 
-After starting up, Karma loads plugins and the configuration file, then starts its local web server which listens for connections.
-Any browser already waiting on websockets from the server will reconnect immediately. As part of loading the plugins, test reporters
-register for 'browser' events so they are ready for test results.
+Messages sent to the client page are forwarded through the websocket to the Karma server. 
+The server re-dispatches these messages as 'browser' events. 
+The reporters listening to 'browser' events get the data; they may print it, save it to files, or forward the data to another service.
+Since the data is sent by the test framework adapter to the reporter, adapters and reporters almost always come in pairs, like karma-jasmine and karma-jasmine-reporter.  
+The detailed content of test-result data is of no concern to other parts of karma: only the reporter needs to know its format.
 
-Then karma launches zero, one, or more browsers, setting their start page the Karma server URL.
+* Karma's workflow -- depend on -- variations & options
 
-When the browsers connect, Karma serves a 'client.html' page; when this page runs in the browser it connects back to the server via websockets.
-
-Once the server sees the websocket connection, it instructs the client -- over the websocket -- to execute tests.  The client page opens an iframe with a 'context.html' page from the server. The server generates this context.html page using the configuration. This page includes the test framework adapter, the code to be tested, and the test code.
-
-When the browser loads this context page, the onload event handler connects the context page to the client page via postMessage. The framework adapter is in charge at this point: it runs the test, reporting errors or success by messaging through the client page.
-
-Messages sent to the client page are forwarded through the websocket to the Karma server. The server re-dispatches these messages as 'browser' events.  The reporters listening to 'browser' events get the data; they may print it, save it to files, or forward the data to another service.
-Since the data is sent by the test framework adapter to the reporter, adapters and reporters almost always come in pairs, like karma-jasmine and karma-jasmine-reporter.  The detailed content of test-result data is of no concern to other parts of karma: only the reporter needs to know its format.
-
-Karma has many variations and options that may cause different workflow with different configurations.
-
-If you are interested in learning more about the design, Karma itself originates from a university thesis, which goes into detail about the design
-and implementation, and it is available to read [right here].
-
-[right here]: https://github.com/karma-runner/karma/raw/master/thesis.pdf
 [browsers]: ../config/browsers.html
