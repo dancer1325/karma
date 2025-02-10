@@ -11,7 +11,7 @@
     * [download Node.js | official site](https://nodejs.org/) or
     * use [NVM PowerShell Module](https://www.powershellgallery.com/packages/nvm)
 
-## Installing Karma and plugins
+## Installing Karma & plugins
 
 * 
 
@@ -26,27 +26,20 @@
     * Karma
     * ALL Karma's plugins / needed by your project
 
-* 
-
-    ```bash
-    # Run Karma:
-    $ ./node_modules/karma/bin/karma start
-    ```
-  * == use Karma CLI
-
-## CLI
+## How to run?
 
 * |
   * Linux or Mac,
-    ```
-    ./node_modules/karma/bin/karma start
-    ```
-  * Windows 
-
       ```bash
-      $ npm install -g karma-cli
+      $ ./node_modules/karma/bin/karma start
       ```
-
+  * Windows,
+    ```bash
+    # install Karma CLI globally
+    $ npm install -g karma-cli
+    $ karma-cli start
+    ```
+  
 [Node.js]: https://nodejs.org/
 [npm]: https://www.npmjs.com/package/karma
 [NVM]: https://github.com/creationix/nvm
