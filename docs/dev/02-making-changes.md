@@ -7,41 +7,36 @@ TODO:
 - how to set up plugins
 -->
 
-If you are thinking about making Karma better, or you just want to hack on it, that’s great!
-Here are some tips on how to set up a Karma workspace and how to send a good pull request.
+* goal
+  * how to 
+    * set up a Karma workspace
+    * send a good PR
 
 ## Setting up the Workspace
 
-* Make sure you have a [GitHub account](https://github.com/signup/free).
-* [Fork the repository] on GitHub.
-* Clone your fork
-  ```bash
-  $ git clone https://github.com/<your-username>/karma.git
-  $ cd karma
-  ```
-* Install for development
-  ```bash
-  $ npm install
-  ```
+* `$ npm install`
+  * install for development
 
 ## Testing and Building
-- Run the tests via:
+* run the tests
   ```bash
   $ npm test
-  # or you can run test suits individually
+  
+  # run test suits INDIVIDUALLY
   $ npm run test:unit
   $ npm run test:e2e
   $ npm run test:client
   ```
 
-- Lint the code via:
+* lint the code
   ```bash
   $ npm run lint
-  # or you can also apply auto-fixes where possible
+  
+  # apply auto-fixes | possible
   $ npm run lint:fix
   ```
 
-- Build the client code via:
+* build the client code 
   ```bash
   $ npm run build
   # or use the watch mode
@@ -49,7 +44,7 @@ Here are some tips on how to set up a Karma workspace and how to send a good pul
   ```
 
 ## Changing the Code
-Checkout a new branch and name it accordingly to what you intend to do:
+* TODO:Checkout a new branch and name it accordingly to what you intend to do:
 - Features get the prefix `feature-`.
 - Bug fixes get the prefix `fix-`.
 - Improvements to the documentation get the prefix `docs-`.
@@ -83,13 +78,6 @@ change the code, run the tests, etc.
 After sending a pull request, other developers will review and discuss your change.
 Please address all the comments. Once everything is all right, one of the maintainers will merge
 your changes in.
-
-
-## Contributor License Agreement
-Please sign our Contributor License Agreement (CLA) before sending pull requests.
-For any code changes to be accepted, the CLA must be signed. It's a quick process, we promise!
-- For individuals, we have a [simple click-through form].
-- For corporations we'll need you to print, sign and one of scan+email, fax or mail [the form].
 
 ## Additional Resources
 
