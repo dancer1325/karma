@@ -1,74 +1,72 @@
 ## Overview
-In order to serve you well, Karma needs to know about your project in order to test it
-and this is done via a configuration file. The easiest way to generate an initial configuration file
-is by using the `karma init` command. This page lists all of the available configuration options.
 
-Note: Most of the framework adapters, reporters, preprocessors and launchers need to be loaded as [plugins].
+* Karma configuration file 
+  * `karma init`
+    * easiest way to generate it
+  * allowed formats
+    * JavaScript,
+    * CoffeeScript,
+    * TypeScript
+  * 👀-- is loaded as a -- regular Node.js module 👀
+  * if you do NOT specify in Karma CLI -> 👀default paths to look for it ⚠️IN ORDER ⚠️ 👀
+    * `./karma.conf.js`
+    * `./karma.conf.coffee`
+    * `./karma.conf.ts`
+    * `./.config/karma.conf.js`
+    * `./.config/karma.conf.coffee`
+    * `./.config/karma.conf.ts`
+  * syntax
+    ```
+    function(config){}
+    # or | karma v6.3+
+    async function(config){}
+    ```
+    * | JavaScript
 
-
-The Karma configuration file can be written in JavaScript, CoffeeScript, or TypeScript and is loaded as a regular Node.js module.
-
-Unless provided as argument, the Karma CLI will look for a configuration file at
-
-* `./karma.conf.js`
-* `./karma.conf.coffee`
-* `./karma.conf.ts`
-* `./.config/karma.conf.js`
-* `./.config/karma.conf.coffee`
-* `./.config/karma.conf.ts`
-
-in that order.
-
-Within the configuration file, the configuration code is put together by setting `module.exports` to point to a function
-which accepts one argument: the configuration object.
-
-```javascript
-// karma.conf.js
-module.exports = function(config) {
-  config.set({
-    basePath: '../..',
-    frameworks: ['jasmine'],
-    //...
-  });
-};
-```
-
-```coffeescript
-# karma.conf.coffee
-module.exports = (config) ->
-  config.set
-    basePath: '../..'
-    frameworks: ['jasmine']
-    # ...
-```
-
-```typescript
-// karma.conf.ts
-module.exports = (config) => {
-  config.set({
-    basePath: '../..',
-    frameworks: ['jasmine'],
-    //...
-  });
-}
-```
-
-Alternatively, you can use an `async` function instead (since v6.3).
-
-```javascript
-// karma.conf.js
-module.exports = async (config) => {
-  const karmaConfig = await getKarmaConfig("dev");
-  
-  config.set({
+    ```javascript, title=karma.conf.js
+    module.exports = function(config) {
+      config.set({
+        basePath: '../..',
+        frameworks: ['jasmine'],
+        //...
+      });
+    };
+    ```
+    ```javascript, title=karma.conf.js
+    // async
+    module.exports = async (config) => {
+    const karmaConfig = await getKarmaConfig("dev");
+    config.set({
     ...karmaConfig
-  });
-};
-```
-
+    });
+    };
+    ```
+    * | CoffeeScript,
+    ```coffeescript, title=karma.conf.coffee
+    module.exports = (config) ->
+      config.set
+        basePath: '../..'
+        frameworks: ['jasmine']
+        # ...
+    ```
+    * | TypeScript
+    ```typescript, title=karma.conf.ts
+    module.exports = (config) => {
+      config.set({
+        basePath: '../..',
+        frameworks: ['jasmine'],
+        //...
+      });
+    }
+    ``` 
 
 ### Customized TypeScript Configuration
-Under the hood Karma uses ts-node to transpile TypeScript to JavaScript. If the resolved `tsconfig.json` has `module` configured as `ES` formats. You might get errors like `SyntaxError: Unexpected token`. This is due that in Node `ES` module formats are not supported. To overcome this issue you need to configure ts-node to use `commonjs` module format.
+* TODO:
+Under the hood Karma uses ts-node to transpile TypeScript to JavaScript.
+If the resolved `tsconfig.json` has `module` configured as `ES` formats. 
+You might get errors like `SyntaxError: Unexpected token`.
+This is due that in Node `ES` module formats are not supported. 
+To overcome this issue you need to configure ts-node to use `commonjs` module format.
 
 Create a JavaScript configuration file that overrides the module format.
 ```javascript
@@ -85,7 +83,8 @@ require('./karma.conf.ts');
 All of the configuration options, which specify file paths, use the [minimatch][minimatch] library to facilitate flexible
 but concise file expressions so you can easily list all of the files you want to include and exclude.
 
-You can find details about each configuration option in the section below. The following options utilize minimatch expressions:
+You can find details about each configuration option in the section below. 
+The following options utilize minimatch expressions:
 
  * `exclude`
  * `files`
@@ -117,8 +116,8 @@ These are all of the available configuration options.
 
 **Description:** When Karma is watching the files for changes, it tries to batch
 multiple changes into a single run so that the test runner doesn't try to start and restart running
-tests more than it should, or restart while build files are not in a consistent state. The configuration setting
-tells Karma how long to wait (in milliseconds) from the last file change before starting
+tests more than it should, or restart while build files are not in a consistent state. 
+The configuration setting tells Karma how long to wait (in milliseconds) from the last file change before starting
 the test process again, resetting the timer each time a file changes (i.e. [debouncing](https://davidwalsh.name/javascript-debounce-function)).
 
 
@@ -128,8 +127,8 @@ the test process again, resetting the timer each time a file changes (i.e. [debo
 **Default:** `''`
 
 **Description:** The root path location that will be used to resolve all relative
-paths defined in `files` and `exclude`. If the `basePath` configuration is a
-relative path, then it will be resolved to the `__dirname` of the configuration file.
+paths defined in `files` and `exclude`. 
+If the `basePath` configuration is a relative path, then it will be resolved to the `__dirname` of the configuration file.
 
 
 ## browserDisconnectTimeout
@@ -139,8 +138,8 @@ relative path, then it will be resolved to the `__dirname` of the configuration 
 
 **Description:** How long does Karma wait for a browser to reconnect (in ms).
 
-With a flaky connection, it is pretty common that the browser disconnects, but the actual test execution is still running
-without any problems. Karma does not treat a disconnection as an immediate failure and will wait for `browserDisconnectTimeout` (ms).
+With a flaky connection, it is pretty common that the browser disconnects, but the actual test execution is still running without any problems.
+Karma does not treat a disconnection as an immediate failure and will wait for `browserDisconnectTimeout` (ms).
 If the browser reconnects during that time, everything is fine.
 
 
@@ -162,11 +161,11 @@ properties, all of which are optional:
 ```
 
 
-Here the `level` is the desired log-level, where level `log` always is logged. The format
-is a string where `%b`, `%t`, `%T`, and `%m` are replaced with the browser string,
-log type in lower-case, log type in uppercase, and log message, respectively. This format will
-only effect the output file. `path` is the output-path of the output-file, and `terminal` indicates
-if the log should be written in the terminal, or not.
+Here the `level` is the desired log-level, where level `log` always is logged.
+The format is a string where `%b`, `%t`, `%T`, and `%m` are replaced with the browser string,
+log type in lower-case, log type in uppercase, and log message, respectively. 
+This format will only effect the output file. 
+`path` is the output-path of the output-file, and `terminal` indicates if the log should be written in the terminal, or not.
 
 
 ## browserDisconnectTolerance
@@ -188,7 +187,8 @@ a flaky network link between the Karma server and the browsers.
 
 **Description:** How long will Karma wait for a message from a browser before disconnecting from it (in ms).
 
-If, during test execution, Karma does not receive any message from a browser within `browserNoActivityTimeout`(ms), it will disconnect from the browser. The default is the one recommended by Travis (https://docs.travis-ci.com/user/gui-and-headless-browsers/#karma-and-firefox-inactivity-timeouts)
+If, during test execution, Karma does not receive any message from a browser within `browserNoActivityTimeout`(ms), it will disconnect from the browser. 
+The default is the one recommended by Travis (https://docs.travis-ci.com/user/gui-and-headless-browsers/#karma-and-firefox-inactivity-timeouts)
 
 
 ## browsers
@@ -209,14 +209,15 @@ If, during test execution, Karma does not receive any message from a browser wit
   * `IE` (launcher requires karma-ie-launcher plugin)
   * `Safari` (launcher requires karma-safari-launcher plugin)
 
-**Description:** A list of browsers to launch and capture. When Karma starts up, it will also start up each browser
-which is placed within this setting. Once Karma is shut down, it will shut down these
-browsers as well. You can capture any browser manually by opening the browser and visiting the URL where
+**Description:** A list of browsers to launch and capture. 
+When Karma starts up, it will also start up each browser which is placed within this setting. Once Karma is shut down, it will shut down these
+browsers as well. 
+You can capture any browser manually by opening the browser and visiting the URL where 
 the Karma web server is listening (by default it is `http://localhost:9876/`).
 
-See [config/browsers] for more information. Additional launchers can be defined through [plugins]. Use the
-`--no-browsers` command line option to override the value of this setting specified in the configuration file
-with an empty list.
+See [config/browsers] for more information.
+Additional launchers can be defined through [plugins]. 
+Use the`--no-browsers` command line option to override the value of this setting specified in the configuration file with an empty list.
 
 
 ## captureTimeout
