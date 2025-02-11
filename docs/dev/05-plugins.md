@@ -2,73 +2,73 @@
 pageTitle: Developing Plugins
 ---
 
-Karma can be extended through plugins. There are five kinds of plugins: *framework*, *reporter*, *launcher*, *preprocessor* and *middleware*. Each type allows to modify a certain aspect of the Karma behavior.
-
-- A *framework* connects a testing framework (like Mocha) to a Karma API, so browser can send test results back to a Karma server.
-- A *reporter* defines how test results are reported to a user.
-- A *launcher* allows Karma to launch different browsers to run tests in.
-- A *preprocessor* is responsible for transforming/transpiling source files before loading them into a browser.
-- A *middleware* can be used to customise how files are served to a browser.
+* Karma's plugins
+  * 👀== way to extend Karma 👀 
+  * kinds of plugins
+    * *framework*,
+      * connects a testing framework (_Example:_ Mocha) -- to a -- Karma API
+        * -> browser -- can send test results, back to a -- Karma server 
+    * *reporter*,
+      * == how test results -- are reported to a -- user
+    * *launcher*,
+      * enable Karma -- to launch -- different browsers | run tests in
+    * *preprocessor*
+      * -- responsible for -- 
+        * | before loading source files into a browser,
+          * transforming/transpiling source files 
+    * *middleware*
+      * allows
+        * customizing how files -- are served -- | browser
 
 ## Dependency injection
 
-Karma is assembled using [*dependency injection*](https://en.wikipedia.org/wiki/Dependency_injection). It is important to understand this concept to be able to develop plugins.
-
-On the very high level you can think of Karma as an object where each key (a *DI token*) is mapped to a certain Karma object (a *service*). For example, `config` DI token maps to `Config` instance, which holds current Karma configuration. Plugins can request (or *inject*) various Karma objects by specifying a corresponding DI token. Upon injection a plugin can interact with injected services to implement their functionality.
-
-There is no exhaustive list of all available services and their DI tokens, but you can discover them by reading Karma's or other plugins' source code.
+* Karma 
+  * -- is assembled via -- [*dependency injection*](https://en.wikipedia.org/wiki/Dependency_injection)
+  * == object /
+    * 💡EACH key (== *DI token*) -- is mapped to a -- certain Karma object (== *service*) 💡
+      * _Example:_ `config` DI token -- maps to -- `Config` instance / holds CURRENT Karma configuration
+      * ⚠️NO EXIST exhaustive list of ALL AVAILABLE DI tokens & services⚠️ 
+        * if you want to find them -> read Karma's or other plugins' source code
+  * 's plugins -- via specifying a corresponding DI token, can request (or *inject*) -- VARIOUS Karma objects
+    * | UPON injection, a plugin -- can via injected services, to implement -- their functionality
 
 ## Plugin structure
 
-Each plugin is essentially a service with its associated DI token. When user [activates a plugin][plugins] in their config, Karma looks for a corresponding DI token and instantiates a service linked to this DI token.
+* plugin
+  * 💡== service + its associated DI token 💡
+  * if user [activates a plugin](../config/plugins.md) -> Karma 
+    * looks for a corresponding DI token
+    * instantiates a service / -- linked to this -- DI token
+  * steps to declare it
+    * define a DI token
+    * explain Karma -- how to -- instantiate it 
+  * use cases
+    * MULTIPLE services / plugin
+      * steps
+        * adding MORE keys | object -- exported by the -- plugin
+      * _Example:_ `framework` + `reporter` plugins
+  * _Example:_ [create a custom Karma plugin](../examples/dev-plugins)
 
-To declare a plugin one should define a DI token for the plugin and explain Karma how to instantiate it. A DI token consists of two parts: a plugin type and plugin's unique name. The former defines what a plugin can do, requirements to the service's API and when it is instantiated. The latter is a unique name, which a plugin user will use to activate a plugin. 
-
-It is totally valid for a plugin to define multiple services. This can be done by adding more keys to the object exported by the plugin. Common example of this would be `framework` + `reporter` plugins, which usually come together.
-
-Let's make a very simple plugin, which prints "Hello, world!" when instantiated. We'll use a `framework` type as it is instantiated early in the Karma lifecycle and does not have any requirements to its API. Let's call our plugin "hello", so its unique name will be `hello`. Joining these two parts we get a DI token for our plugin `framework:hello`. Let's declare it.
-
-```js
-// hello-plugin.js
-
-// A factory function for our plugin, it will be called, when Karma needs to
-// instantiate a plugin. Normally it should return an instance of the service
-// conforming to the API requirements of the plugin type (more on that below),
-// but for our simple example we don't need any service and just print 
-// a message when function is called.
-function helloFrameworkFactory() {
-  console.log('Hello, world!')
-}
-
-module.exports = {
-  // Declare the plugin, so Karma knows that it exists.
-  // 'factory' tells Karma that it should call `helloFrameworkFactory`
-  // function and use whatever it returns as a service for the DI token
-  // `framework:hello`.
-  'framework:hello': ['factory', helloFrameworkFactory]
-};
-```
-
-```js
-// karma.conf.js
-
-module.exports = (config) => {
-  config.set({
-    plugins: [
-      require('./hello-plugin')
-    ],
-    // Activate our plugin by specifying its unique name in the 
-    // corresponding configuration key.
-    frameworks: ['hello']
-  })
-}
-```
+* DI token
+  * == plugin type + plugin's unique name
+    * plugin type
+      * defines
+        * what a plugin can do
+        * service's API's requirements 
+        * when it is instantiated 
+    * plugin's unique name
+      * uses
+        * by the plugin user -- to activate a -- plugin
 
 ## Injecting dependencies
 
-In "Dependency injection" section we discussed that it is possible to inject any Karma services into a plugin and interact with them. This can be done by setting an `$inject` property on the plugin's factory function to an array of DI tokens plugin wishes to interact with. Karma will pick up this property and pass requested services to the factory functions as parameters.
+* TODO:
+In "Dependency injection" section we discussed that it is possible to inject any Karma services into a plugin and interact with them.
+This can be done by setting an `$inject` property on the plugin's factory function to an array of DI tokens plugin wishes to interact with. 
+Karma will pick up this property and pass requested services to the factory functions as parameters.
 
-Let's make the `hello` framework a bit more useful and make it add `hello.js` file to the `files` array. This way users of the plugin can, for example, access a function defined in `hello.js` from their tests.
+Let's make the `hello` framework a bit more useful and make it add `hello.js` file to the `files` array. 
+This way users of the plugin can, for example, access a function defined in `hello.js` from their tests.
 
 ```js
 // hello-plugin.js
@@ -91,13 +91,16 @@ module.exports = {
 };
 ```
 
-The Karma config is unchanged and is omitted for brevity. See above example for the plugin usage.
+The Karma config is unchanged and is omitted for brevity. 
+See above example for the plugin usage.
 
-Note: Currently, Karma uses [node-di] library as a DI implementation. The library is more powerful than what's documented above, however, the DI implementation may change in the future, so we recommend not to rely on the node-di implementation details.
+Note: Currently, Karma uses [node-di] library as a DI implementation.
+The library is more powerful than what's documented above, however, the DI implementation may change in the future, so we recommend not to rely on the node-di implementation details.
 
 ## Plugin types
 
-This section outlines API requirements and conventions for different plugin types. There also links to some plugins, which you can use for inspiration.
+This section outlines API requirements and conventions for different plugin types.
+There also links to some plugins, which you can use for inspiration.
 
 ### Frameworks
 
@@ -171,7 +174,8 @@ A preprocessor is a function that accepts three arguments (`content`, `file`, an
 
 ### Crazier stuff
 
-As Karma is assembled by dependency injection, a plugin can ask for pretty much any Karma component and interact with it. There are a couple of plugins that do more interesting stuff like this, check out [karma-closure], [karma-intellij].
+As Karma is assembled by dependency injection, a plugin can ask for pretty much any Karma component and interact with it. 
+There are a couple of plugins that do more interesting stuff like this, check out [karma-closure], [karma-intellij].
 
 [karma-jasmine]: https://github.com/karma-runner/karma-jasmine
 [karma-mocha]: https://github.com/karma-runner/karma-mocha

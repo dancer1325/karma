@@ -1,0 +1,15 @@
+{
+  "name": "dev-plugins",
+  "version": "1.0.0",
+  "description": "* goal   * create a custom Karma plugin /     * | instantiate it, prints \"Hello, world!\"       * -> `framework` type",
+  "main": "hello-plugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "karma": "^6.4.4"
+  }
+}
