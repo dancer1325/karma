@@ -1,79 +1,37 @@
-Most of the time, you will be using Karma directly from the command line.
-You can, however, call Karma programmatically from your node module. Here is the public API.
-
+* ways to interact with Karma
+  * -- via -- CL
+  * -- via -- public API
 
 ## karma.Server(options, [callback=process.exit])
 
-### `constructor`
+### `constructor: Server`
 
-- **Returns:** `Server` instance.
+#### Deprecated Behavior
 
-#### Usage
+* _Example:_ [constructorDeprecatedBehavior.js](../examples/dev-public-api/constructorDeprecatedBehavior.js)
+  * if you run `node constructorDeprecatedBehavior.js` -> you get a WARN message
 
-Notice the capital 'S' on  `require('karma').Server`.
+#### New Behavior
 
-##### Deprecated Behavior
+* _Example:_ [constructorNewBehavior.js](../examples/dev-public-api/constructorNewBehavior.js)
+  * run `node constructorNewBehavior.js`
 
-The following still works, but the way it behaves is deprecated and will be
-changed in a future major version.
+### `server.start(): Promise`
 
-```javascript
-var Server = require('karma').Server
-var karmaConfig = {port: 9876}
-var server = new Server(karmaConfig, function(exitCode) {
-  console.log('Karma has exited with ' + exitCode)
-  process.exit(exitCode)
-})
-```
+* 👀== `karma start` 👀
+*  _Example:_ [constructorNewBehavior.js](../examples/dev-public-api/constructorNewBehavior.js)
 
-##### New Behavior
+### `server.refreshFiles(): Promise`
 
-```javascript
-const karma = require('karma')
-const parseConfig = karma.config.parseConfig
-const Server = karma.Server
+* trigger a file list refresh
 
-parseConfig(
-  null,
-  { port: 9876 },
-  { promiseConfig: true, throwErrors: true }
-).then(
-  (karmaConfig) => {
-    const server = new Server(karmaConfig, function doneCallback(exitCode) {
-      console.log('Karma has exited with ' + exitCode)
-      process.exit(exitCode)
-    })
-  },
-  (rejectReason) => { /* respond to the rejection reason error */ }
-);
-```
+### `server.refreshFile(path): Promise`
 
-### `server.start()`
-
-Equivalent of `karma start`.
-
-```javascript
-server.start()
-```
-
-### `server.refreshFiles()`
-
-Trigger a file list refresh. Returns a promise.
-
-```javascript
-server.refreshFiles()
-```
-
-### `server.refreshFile(path)`
-
-Trigger a file refresh. Returns a promise.
-
-```javascript
-server.refreshFile('src/js/module-dep.js')
-```
+* trigger a file refresh
 
 ### Events
 
+* TODO:
 The `server` object is an [`EventEmitter`](https://nodejs.org/docs/latest/api/events.html#events_class_events_eventemitter). You can simply listen to events like this:
 
 ```javascript
