@@ -2,13 +2,16 @@
 showInMenu: false
 ---
 
-In the repository we use and enforce the commit message conventions. The conventions are verified using [commitlint] with [Angular config](https://www.npmjs.com/package/@commitlint/config-angular).
+* goal
+  * | this repository, enforce the commit message conventions
+    * -- via -- [commitlint] + [Angular config](https://www.npmjs.com/package/@commitlint/config-angular)
 
-## The reasons for these conventions:
-- automatic generating of the changelog
-- simple navigation through git history (e.g. ignoring style changes)
+## Reasons 
+* changelog
+  * automatic generated 
+* SIMPLE navigation -- through -- git history
 
-## Format of the commit message:
+## commit message's format
 ```bash
 <type>(<scope>): <subject>
 <BLANK LINE>
@@ -17,19 +20,22 @@ In the repository we use and enforce the commit message conventions. The convent
 <footer>
 ```
 
-## Example commit message:
+* _Example:_ 
 
-```bash
-fix(middleware): ensure Range headers adhere more closely to RFC 2616
-
-Add one new dependency, use `range-parser` (Express dependency) to compute
-range. It is more well-tested in the wild.
-
-Fixes #2310
-```
+    ```bash
+    fix(middleware): ensure Range headers adhere more closely to RFC 2616
+    
+    Add one new dependency, use `range-parser` (Express dependency) to compute
+    range. It is more well-tested in the wild.
+    
+    Fixes #2310
+    ```
 
 ## Message subject (first line)
-The first line cannot be longer than 72 characters and should be followed by a blank line. The type and scope should always be lowercase as shown below.
+
+* TODO:
+The first line cannot be longer than 72 characters and should be followed by a blank line. 
+The type and scope should always be lowercase as shown below.
 
 ### Allowed `<type>` values:
 
@@ -58,7 +64,8 @@ omitted. In smaller projects such as Karma plugins, the `<scope>` is empty.
 
 ## Message body
 
-Just as in the `<subject>`, use the imperative, present tense: "change" not "changed" nor "changes". Message body should include motivation for the change and contrasts with previous behavior.
+Just as in the `<subject>`, use the imperative, present tense: "change" not "changed" nor "changes". 
+Message body should include motivation for the change and contrasts with previous behavior.
 
 ## Message footer
 
@@ -89,7 +96,8 @@ Any commit with the breaking change section will trigger a MAJOR release and app
 
 ---
 
-This document is based on [Angular Commit Message Format]. See the [commit history] for examples of properly-formatted commit messages.
+This document is based on [Angular Commit Message Format]. 
+See the [commit history] for examples of properly-formatted commit messages.
 
 [commitlint]: https://conventional-changelog.github.io/commitlint/
 [Angular config]: https://www.npmjs.com/package/@commitlint/config-angular
