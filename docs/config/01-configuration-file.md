@@ -6,6 +6,13 @@
   * allowed formats
     * JavaScript,
     * CoffeeScript,
+      ```coffeescript, title=karma.conf.coffee
+      module.exports = (config) ->
+        config.set
+        basePath: '../..'
+        frameworks: ['jasmine']
+        # ...
+      ```
     * TypeScript
   * 👀-- is loaded as a -- regular Node.js module 👀
   * if you do NOT specify in Karma CLI -> 👀default paths to look for it ⚠️IN ORDER ⚠️ 👀
@@ -40,14 +47,6 @@
     ...karmaConfig
     });
     };
-    ```
-    * | CoffeeScript,
-    ```coffeescript, title=karma.conf.coffee
-    module.exports = (config) ->
-      config.set
-        basePath: '../..'
-        frameworks: ['jasmine']
-        # ...
     ```
     * | TypeScript
     ```typescript, title=karma.conf.ts
@@ -122,14 +121,12 @@ the test process again, resetting the timer each time a file changes (i.e. [debo
 
 
 ## basePath
-**Type:** String
-
-**Default:** `''`
-
-**Description:** The root path location that will be used to resolve all relative
-paths defined in `files` and `exclude`. 
-If the `basePath` configuration is a relative path, then it will be resolved to the `__dirname` of the configuration file.
-
+* **Type:** String
+* **Default:** `''`
+* == root path location 
+  * uses
+    * resolve ALL relative paths defined | `files` & `exclude`
+      * if it's a relative path -> resolved to the configuration file's `__dirname`
 
 ## browserDisconnectTimeout
 **Type:** Number
@@ -427,13 +424,13 @@ Use this to prevent accidental disabling tests needed to validate production.
 **Description:** Enable or disable failure on failing tests.
 
 ## files
-**Type:** Array
-
-**Default:** `[]`
-
-**Description:** List of files/patterns to load in the browser.
-
-See [config/files] for more information.
+* **Type:** Array
+* **Default:** `[]`
+* ⚠️MANDATORY⚠️
+* == List of files/patterns / 
+  * loaded | browser
+  * watched & served -- by -- Karma
+* see [MORE](02-files.md)
 
 ## forceJSONP
 **Type:** Boolean
@@ -443,15 +440,17 @@ See [config/files] for more information.
 **Description:** Force socket.io to use JSONP polling instead of XHR polling.
 
 ## frameworks
-**Type:** Array
-
-**Default:** `[]`
-
-**Description:** List of test frameworks you want to use. Typically, you will set this to `['jasmine']`, `['mocha']` or `['qunit']`...
-
-Please note just about all frameworks in Karma require an additional plugin/framework library to be installed (via npm).
-
-Additional information can be found in [plugins].
+* **Type:** Array
+* **Default:** `[]`
+* == list of test frameworks / you want to use
+  * ALLOWED values
+    * `['jasmine']`,
+    * `['mocha']`
+    * `['qunit']`
+    * ...
+* requirements
+  * install -- , via npm, -- ADDITIONAL plugin/framework library 
+* [here](05-plugins.md)
 
 ## listenAddress
 **Type:** String
