@@ -5,7 +5,7 @@
   * allows
     * test -- knowing your project -- properly
   * see 
-    * [configuration file docs]
+    * [MORE](../config/01-configuration-file.md)
 
 ## How to create?
 
@@ -73,12 +73,5 @@
 ## Integrating with Grunt/Gulp
 
 * see
-  * [grunt-karma]
-  * [gulp-karma]
-
-
-[configuration file docs]: ../config/configuration-file.html
-[Grunt]: https://gruntjs.com/
-[grunt-karma]: https://github.com/karma-runner/grunt-karma
-[Gulp]: https://gulpjs.com
-[gulp-karma]: https://github.com/karma-runner/gulp-karma
+  * [grunt-karma](https://github.com/karma-runner/grunt-karma)
+  * [gulp-karma](https://github.com/karma-runner/gulp-karma)
