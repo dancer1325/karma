@@ -1,5 +1,5 @@
 * Karma
-  * 💡runs | ALL [Node.js] LTS releases 💡
+  * 💡runs | ALL Node.js LTS releases 💡
   * 👀-- AVAILABLE as -- [npm] package 👀
 
 ## Requirements
@@ -39,8 +39,3 @@
     $ npm install -g karma-cli
     $ karma-cli start
     ```
-  
-[Node.js]: https://nodejs.org/
-[npm]: https://www.npmjs.com/package/karma
-[NVM]: https://github.com/creationix/nvm
-[FAQ]: ./faq.html
