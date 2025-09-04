@@ -6,14 +6,8 @@
   * allowed formats
     * JavaScript,
     * CoffeeScript,
-      ```coffeescript, title=karma.conf.coffee
-      module.exports = (config) ->
-        config.set
-        basePath: '../..'
-        frameworks: ['jasmine']
-        # ...
-      ```
     * TypeScript
+      * [customize TS configuration](#customized-typescript-configuration)
   * 👀-- is loaded as a -- regular Node.js module 👀
   * if you do NOT specify in Karma CLI -> 👀default paths to look for it ⚠️IN ORDER ⚠️ 👀
     * `./karma.conf.js`
@@ -22,61 +16,38 @@
     * `./.config/karma.conf.js`
     * `./.config/karma.conf.coffee`
     * `./.config/karma.conf.ts`
-  * syntax
-    ```
-    function(config){}
-    # or | karma v6.3+
-    async function(config){}
-    ```
-    * | JavaScript
-
-    ```javascript, title=karma.conf.js
-    module.exports = function(config) {
+  * ALLOWED syntax
+    * sync
+      ```javascript, title=karma.conf.js
+      module.exports = function(config) {
+        config.set({
+          basePath: '../..',
+          frameworks: ['jasmine'],
+          //...
+        });
+      };
+      ```
+    * async
+      ```javascript, title=karma.conf.js
+      // async
+      module.exports = async (config) => {
+      const karmaConfig = await getKarmaConfig("dev");
       config.set({
-        basePath: '../..',
-        frameworks: ['jasmine'],
-        //...
+      ...karmaConfig
       });
-    };
-    ```
-    ```javascript, title=karma.conf.js
-    // async
-    module.exports = async (config) => {
-    const karmaConfig = await getKarmaConfig("dev");
-    config.set({
-    ...karmaConfig
-    });
-    };
-    ```
-    * | TypeScript
-    ```typescript, title=karma.conf.ts
-    module.exports = (config) => {
-      config.set({
-        basePath: '../..',
-        frameworks: ['jasmine'],
-        //...
-      });
-    }
-    ``` 
+      };
+      ```
 
 ### Customized TypeScript Configuration
-* TODO:
-Under the hood Karma uses ts-node to transpile TypeScript to JavaScript.
-If the resolved `tsconfig.json` has `module` configured as `ES` formats. 
-You might get errors like `SyntaxError: Unexpected token`.
-This is due that in Node `ES` module formats are not supported. 
-To overcome this issue you need to configure ts-node to use `commonjs` module format.
 
-Create a JavaScript configuration file that overrides the module format.
-```javascript
-// karma.conf.js
-require('ts-node').register({
-  compilerOptions: {
-    module: 'commonjs'
-  }
-});
-require('./karma.conf.ts');
-```
+* Karma transpiles TypeScript -- , via ts-node, to -- JavaScript 
+* TODO:
+
+* common Problems
+  * "tsconfig.json"'s `module:ES`,
+    * `SyntaxError: Unexpected token`
+      * Reason of the error: 🧠| NodeJs, `ES` module formats are NOT supported🧠
+      * Solution: configure ts-node / use `commonjs` module format
 
 ## File Patterns
 All of the configuration options, which specify file paths, use the [minimatch][minimatch] library to facilitate flexible
