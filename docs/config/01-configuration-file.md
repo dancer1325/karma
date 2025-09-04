@@ -50,26 +50,24 @@
       * Solution: configure ts-node / use `commonjs` module format
 
 ## File Patterns
-All of the configuration options, which specify file paths, use the [minimatch][minimatch] library to facilitate flexible
-but concise file expressions so you can easily list all of the files you want to include and exclude.
 
-You can find details about each configuration option in the section below. 
-The following options utilize minimatch expressions:
-
- * `exclude`
- * `files`
- * `preprocessors`
-
-Examples:
-
- * `**/*.js`: All files with a "js" extension in all subdirectories
- * `**/!(jquery).js`: Same as previous, but excludes "jquery.js"
- * `**/(foo|bar).js`: In all subdirectories, all "foo.js" or "bar.js" files
+* ALL configuration options / specify file paths
+  * 👀use the [minimatch](https://github.com/isaacs/minimatch) library👀
+    * _Examples:_
+      * `**/*.js`
+        * == ALL ".js" | directory + subdirectories
+      * `**/!(jquery).js`
+        * == PREVIOUSLY + excludes "jquery.js"
+      * `**/(foo|bar).js`
+        * == "foo.js" OR "bar.js" | ALL subdirectories 
+  * _Example:_ 
+    * [`exclude`](#exclude)
+    * [`files`](#files)
+    * [`preprocessors`](#preprocessors)
 
 ## Configuration Options
-These are all of the available configuration options.
 
-## autoWatch
+### autoWatch
 **Type:** Boolean
 
 **Default:**  `true`
@@ -79,7 +77,7 @@ These are all of the available configuration options.
 **Description:** Enable or disable watching files and executing the tests whenever one of these files changes.
 
 
-## autoWatchBatchDelay
+### autoWatchBatchDelay
 **Type:** Number
 
 **Default:**  `250`
@@ -91,7 +89,7 @@ The configuration setting tells Karma how long to wait (in milliseconds) from th
 the test process again, resetting the timer each time a file changes (i.e. [debouncing](https://davidwalsh.name/javascript-debounce-function)).
 
 
-## basePath
+### basePath
 * **Type:** String
 * **Default:** `''`
 * == root path location 
@@ -99,7 +97,7 @@ the test process again, resetting the timer each time a file changes (i.e. [debo
     * resolve ALL relative paths defined | `files` & `exclude`
       * if it's a relative path -> resolved to the configuration file's `__dirname`
 
-## browserDisconnectTimeout
+### browserDisconnectTimeout
 **Type:** Number
 
 **Default:** `2000`
@@ -111,7 +109,7 @@ Karma does not treat a disconnection as an immediate failure and will wait for `
 If the browser reconnects during that time, everything is fine.
 
 
-## browserConsoleLogOptions
+### browserConsoleLogOptions
 **Type:** Object
 
 **Default:** `{level: "debug", format: "%b %T: %m", terminal: true}`
@@ -136,7 +134,7 @@ This format will only effect the output file.
 `path` is the output-path of the output-file, and `terminal` indicates if the log should be written in the terminal, or not.
 
 
-## browserDisconnectTolerance
+### browserDisconnectTolerance
 **Type:** Number
 
 **Default:** `0`
@@ -148,7 +146,7 @@ Usually, any disconnection is considered a failure, but this option allows you t
 a flaky network link between the Karma server and the browsers.
 
 
-## browserNoActivityTimeout
+### browserNoActivityTimeout
 **Type:** Number
 
 **Default:** `30000`
@@ -159,7 +157,7 @@ If, during test execution, Karma does not receive any message from a browser wit
 The default is the one recommended by Travis (https://docs.travis-ci.com/user/gui-and-headless-browsers/#karma-and-firefox-inactivity-timeouts)
 
 
-## browsers
+### browsers
 **Type:** Array
 
 **Default:**  `[]`
@@ -188,7 +186,7 @@ Additional launchers can be defined through [plugins].
 Use the`--no-browsers` command line option to override the value of this setting specified in the configuration file with an empty list.
 
 
-## captureTimeout
+### captureTimeout
 **Type:** Number
 
 **Default:** `60000`
@@ -200,7 +198,7 @@ If any browser does not get captured within the timeout, Karma will kill it and 
 it again and, after three attempts to capture it, Karma will give up.
 
 
-## client.args
+### client.args
 **Type:** Array
 
 **Default:** `undefined`
@@ -214,7 +212,7 @@ The `client.args` option allows you to set this value for actions other than `ru
 How this value is used is up to your test adapter - you should check your adapter's documentation to see how (and if) it uses this value.
 
 
-## client.useIframe
+### client.useIframe
 **Type:** Boolean
 
 **Default:** `true`
@@ -224,7 +222,7 @@ How this value is used is up to your test adapter - you should check your adapte
 If true, Karma runs the tests inside an iFrame. If false, Karma runs the tests in a new window. Some tests may not run in an
 iFrame and may need a new window to run.
 
-## client.runInParent
+### client.runInParent
 **Type:** Boolean
 
 **Default:** `false`
@@ -233,7 +231,7 @@ iFrame and may need a new window to run.
 
 If true, Karma runs the tests inside the original window without using iframe. It will load the test scripts dynamically.
 
-## client.captureConsole
+### client.captureConsole
 **Type:** Boolean
 
 **Default:** `true`
@@ -241,7 +239,7 @@ If true, Karma runs the tests inside the original window without using iframe. I
 **Description:** Capture all console output and pipe it to the terminal.
 
 
-## client.clearContext
+### client.clearContext
 **Type:** Boolean
 
 **Default:** `true`
@@ -251,7 +249,7 @@ If true, Karma runs the tests inside the original window without using iframe. I
 If true, Karma clears the context window upon the completion of running the tests. If false, Karma does not clear the context window
 upon the completion of running the tests. Setting this to false is useful when embedding a Jasmine Spec Runner Template.
 
-## client.clientDisplayNone
+### client.clientDisplayNone
 **Type:** Boolean
 
 **Default:** `false`
@@ -260,7 +258,7 @@ upon the completion of running the tests. Setting this to false is useful when e
 
 If true, Karma does not display the banner and browser list. Useful when using karma on component tests with screenshots.
 
-## client.allowedReturnUrlPatterns
+### client.allowedReturnUrlPatterns
 **Type:** Array
 
 **Default:** `['^https?://']`
@@ -269,7 +267,7 @@ If true, Karma does not display the banner and browser list. Useful when using k
 
 If the value of the `return_url` query parameter does not match any regular expression derived from the string representation of each of the elements of this array, navigation to it will be blocked.
 
-## colors
+### colors
 **Type:** Boolean
 
 **Default:**   `true`
@@ -279,7 +277,7 @@ If the value of the `return_url` query parameter does not match any regular expr
 **Description:** Enable or disable colors in the output (reporters and logs).
 
 
-## concurrency
+### concurrency
 **Type:** Number
 
 **Default:** `Infinity`
@@ -288,7 +286,7 @@ If the value of the `return_url` query parameter does not match any regular expr
 
 Especially on services like SauceLabs and Browserstack, it makes sense only to launch a limited amount of browsers at once, and only start more when those have finished. Using this configuration, you can specify how many browsers should be running at once at any given point in time.
 
-## crossOriginAttribute
+### crossOriginAttribute
 
 **Type:** Boolean
 
@@ -298,7 +296,7 @@ Especially on services like SauceLabs and Browserstack, it makes sense only to l
 Disable this when you need to load external scripts that are served without the necessary `Access-Control-Allow-Origin` header.
 
 
-## customContextFile
+### customContextFile
 **Type:** string
 
 **Default:** `null`
@@ -306,7 +304,7 @@ Disable this when you need to load external scripts that are served without the 
 **Description:** If `null` (default), uses karma's own `context.html` file.
 
 
-## customDebugFile
+### customDebugFile
 **Type:** string
 
 **Default:** `null`
@@ -314,7 +312,7 @@ Disable this when you need to load external scripts that are served without the 
 **Description:** If `null` (default), uses karma's own `debug.html` file.
 
 
-## customClientContextFile
+### customClientContextFile
 **Type:** string
 
 **Default:** `null`
@@ -322,7 +320,7 @@ Disable this when you need to load external scripts that are served without the 
 **Description:** If `null` (default), uses karma's own `client_with_context.html` file (which is used when client.runInParent set to true).
 
 
-## customHeaders
+### customHeaders
 **Type:** Array
 
 **Default:** `undefined`
@@ -347,7 +345,7 @@ customHeaders: [{
 ```
 
 
-## detached
+### detached
 **Type:** Boolean
 
 **Default:** `false`
@@ -358,14 +356,14 @@ customHeaders: [{
 The server can be stopped using the `karma stop` command.
 
 
-## exclude
+### exclude
 **Type:** Array
 
 **Default:** `[]`
 
 **Description:** List of files/patterns to exclude from loaded files.
 
-## failOnEmptyTestSuite
+### failOnEmptyTestSuite
 **Type:** Boolean
 
 **Default:** `true`
@@ -375,7 +373,7 @@ The server can be stopped using the `karma stop` command.
 **Description:** Enable or disable failure on running empty test-suites. If disabled the program
 will return exit-code `0` and display a warning.
 
-## failOnSkippedTests
+### failOnSkippedTests
 **Type:** Boolean
 
 **Default:** `false`
@@ -385,7 +383,7 @@ will return exit-code `0` and display a warning.
 **Description:** Enable or disable failure on tests deliberately disabled, eg fit() or xit() tests in jasmine.
 Use this to prevent accidental disabling tests needed to validate production.
 
-## failOnFailingTestSuite
+### failOnFailingTestSuite
 **Type:** Boolean
 
 **Default:** `true`
@@ -394,7 +392,7 @@ Use this to prevent accidental disabling tests needed to validate production.
 
 **Description:** Enable or disable failure on failing tests.
 
-## files
+### files
 * **Type:** Array
 * **Default:** `[]`
 * ⚠️MANDATORY⚠️
@@ -403,14 +401,14 @@ Use this to prevent accidental disabling tests needed to validate production.
   * watched & served -- by -- Karma
 * see [MORE](02-files.md)
 
-## forceJSONP
+### forceJSONP
 **Type:** Boolean
 
 **Default:** `false`
 
 **Description:** Force socket.io to use JSONP polling instead of XHR polling.
 
-## frameworks
+### frameworks
 * **Type:** Array
 * **Default:** `[]`
 * == list of test frameworks / you want to use
@@ -423,14 +421,14 @@ Use this to prevent accidental disabling tests needed to validate production.
   * install -- , via npm, -- ADDITIONAL plugin/framework library 
 * [here](05-plugins.md)
 
-## listenAddress
+### listenAddress
 **Type:** String
 
 **Default:** `'0.0.0.0' or LISTEN_ADDR`
 
 **Description:** Address that the server will listen on. Change to 'localhost' to only listen to the loopback, or '::' to listen on all IPv6 interfaces
 
-## hostname
+### hostname
 **Type:** String
 
 **Default:** `'localhost'`
@@ -438,7 +436,7 @@ Use this to prevent accidental disabling tests needed to validate production.
 **Description:** Hostname to be used when capturing browsers.
 
 
-## httpsServerOptions
+### httpsServerOptions
 **Type:** Object
 
 **Default:** `{}`
@@ -455,7 +453,7 @@ httpsServerOptions: {
 },
 ```
 
-## logLevel
+### logLevel
 **Type:** Constant
 
 **Default:** `config.LOG_INFO`
@@ -473,7 +471,7 @@ httpsServerOptions: {
 **Description:** Level of logging.
 
 
-## loggers
+### loggers
 **Type:** Array
 
 **Default:** `[{type: 'console'}]`
@@ -481,7 +479,7 @@ httpsServerOptions: {
 **Description:** A list of log appenders to be used. See the documentation for [log4js] for more information.
 
 
-## middleware
+### middleware
 **Type:** Array
 
 **Default:** `[]`
@@ -511,7 +509,7 @@ plugins: [
 ```
 
 
-## mime
+### mime
 **Type:** Object
 
 **Default:** `{}`
@@ -529,7 +527,7 @@ mime: {
 ```
 
 
-## beforeMiddleware
+### beforeMiddleware
 **Type:** Array
 
 **Default:** `[]`
@@ -537,7 +535,7 @@ mime: {
 **Description:** This is the same as middleware except that these middleware will be run before karma's own middleware.
 
 
-## plugins
+### plugins
 **Type:** Array
 
 **Default:** `['karma-*']`
@@ -547,7 +545,7 @@ mime: {
 By default, Karma loads plugins from all sibling npm packages which have a name starting with `karma-*`.
 
 
-## port
+### port
 **Type:** Number
 
 **Default:** `9876`
@@ -559,7 +557,7 @@ By default, Karma loads plugins from all sibling npm packages which have a name 
 If the defined port is already in use, karma will automatically increase its value in steps of 1 until a free port is found.
 
 
-## processKillTimeout
+### processKillTimeout
 **Type:** Number
 
 **Default:** `2000`
@@ -569,7 +567,7 @@ If the defined port is already in use, karma will automatically increase its val
 If, after test execution or after Karma attempts to kill the browser, browser is not killed within `processKillTimeout`(ms), Karma will send a SIGKILL signal to attempt to kill the browser forcefully.
 
 
-## preprocessors
+### preprocessors
 **Type:** Object
 
 **Default:** `{'**/*.coffee': 'coffee'}`
@@ -589,7 +587,7 @@ but your interactive debugging does not.
 Click <a href="preprocessors.html">here</a> for more information.
 
 
-## protocol
+### protocol
 **Type:** String
 
 **Default:** `'http:'`
@@ -606,7 +604,7 @@ Determines the use of the Node `http` or `https` class.
 Note: Using `'https:'` requires you to specify `httpsServerOptions`.
 
 
-## httpModule
+### httpModule
 **Type:** String
 
 **Default:** `undefined`
@@ -617,7 +615,7 @@ Uses the provided module instead of node's built in `http` or `https` module. Th
 
 Note: if you're using this to enable `http2` you must also set the `protocol` to `https:` and specify certificates as http2 can only run of https.
 
-## proxies
+### proxies
 **Type:** Object
 
 **Default:** `{}`
@@ -643,7 +641,7 @@ proxies: {
 ```
 
 
-## proxyValidateSSL
+### proxyValidateSSL
 **Type:** Boolean
 
 **Default:** `true`
@@ -651,7 +649,7 @@ proxies: {
 **Description:** Whether or not Karma or any browsers should raise an error when an invalid SSL certificate is found.
 
 
-## reportSlowerThan
+### reportSlowerThan
 **Type:** Number
 
 **Default:** `0`
@@ -660,7 +658,7 @@ proxies: {
 This is disabled by default (since the default value is 0).
 
 
-## reporters
+### reporters
 **Type:** Array
 
 **Default:** `['progress']`
@@ -679,7 +677,7 @@ Additional reporters, such as `growl`, `junit`, `teamcity` or `coverage` can be 
 Note: Just about all additional reporters in Karma (other than progress) require an additional library to be installed (via npm).
 
 
-## formatError
+### formatError
 **Type:** Function
 
 **Default:** `undefined`
@@ -696,7 +694,7 @@ Note: Just about all additional reporters in Karma (other than progress) require
 
 The CLI option should be a path to a file that exports the format function.  This can be a function exported at the root of the module or an export named `formatError`.
 
-## pingTimeout
+### pingTimeout
 **Type** Number
 
 **Default** 5000
@@ -704,7 +702,7 @@ The CLI option should be a path to a file that exports the format function.  Thi
 **Description** Socket.io pingTimeout in ms, https://socket.io/docs/server-api/#new-Server-httpServer-options.
 Very slow networks may need values up to 60000. Larger values delay discovery of deadlock in tests or browser crashes.
 
-## restartOnFileChange
+### restartOnFileChange
 **Type:** Boolean
 
 **Default:** `false`
@@ -714,7 +712,7 @@ the current run is finished. Enabling this setting will cancel the current run a
 immediately when a change is detected.
 
 
-## retryLimit
+### retryLimit
 **Type:** Number
 
 **Default:** 2
@@ -722,7 +720,7 @@ immediately when a change is detected.
 **Description:** When a browser crashes, karma will try to relaunch. This defines how many times karma should relaunch
 a browser before giving up.
 
-## singleRun
+### singleRun
 **Type:** Boolean
 
 **Default:** `false`
@@ -736,7 +734,7 @@ on whether all tests passed or any tests failed.
 
 
 
-## transports
+### transports
 **Type:** Array
 
 **Default:** `['polling', 'websocket']`
@@ -746,7 +744,7 @@ is handed off to [socket.io](https://socket.io/) (which manages the communicatio
 between browsers and the testing server).
 
 
-## proxyReq
+### proxyReq
 **Type:** Function
 
 **Default:** `undefined`
@@ -762,7 +760,7 @@ proxyReq: function(proxyReq, req, res, options) {
 }
 ```
 
-## proxyRes
+### proxyRes
 **Type:** Function
 
 **Default:** `undefined`
@@ -783,7 +781,7 @@ proxyRes: function(proxyRes, req, res) {
 ```
 
 
-## upstreamProxy
+### upstreamProxy
 **Type:** Object
 
 **Default:** `undefined`
@@ -792,21 +790,21 @@ proxyRes: function(proxyRes, req, res) {
 
 If set then the following fields will be defined and can be overridden:
 
-### path
+#### path
 **Type:** String
 
 **Default:** `'/'`
 
 **Description:** Will be prepended to the base url when launching browsers and prepended to internal urls as loaded by the browsers
 
-### port
+#### port
 **Type:** Number
 
 **Default:** `9875`
 
 **Description:** Will be used as the port when launching browsers
 
-### hostname
+#### hostname
 **Type:** String
 
 **Default:** `'localhost'`
@@ -815,7 +813,7 @@ If set then the following fields will be defined and can be overridden:
 
 
 
-### protocol
+#### protocol
 **Type:** String
 
 **Default:** `'http:'`
@@ -823,7 +821,7 @@ If set then the following fields will be defined and can be overridden:
 **Description:** Will be used as the protocol when launching browsers
 
 
-## urlRoot
+### urlRoot
 **Type:** String
 
 **Default:** `'/'`
@@ -833,7 +831,7 @@ If set then the following fields will be defined and can be overridden:
 All of Karma's urls get prefixed with the `urlRoot`. This is helpful when using proxies, as
 sometimes you might want to proxy a url that is already taken by Karma.
 
-## browserSocketTimeout
+### browserSocketTimeout
 **Type:** Number
 
 **Default:** `20000`
@@ -862,4 +860,4 @@ If you see this error, you can try increasing the socket connection timeout.
 [config/browsers]: browsers.html
 [config/preprocessors]: preprocessors.html
 [log4js]: https://github.com/nomiddlename/log4js-node
-[minimatch]: https://github.com/isaacs/minimatch
+[minimatch]: 
