@@ -168,34 +168,45 @@ The default is the one recommended by Travis (https://docs.travis-ci.com/user/gu
 
 
 ### browsers
-**Type:** Array
 
-**Default:**  `[]`
+* **Type:**
+  * Array
+    * if you configure MULTIPLE & you start Karma -> start ALL browsers configured
+* **Default:**
+  * `[]`
+* **CLI:**
+  * `--browsers Chrome,Firefox`, `--no-browsers`
 
-**CLI:** `--browsers Chrome,Firefox`, `--no-browsers`
-
-**Possible Values:**
-
-  * `Chrome` (launcher requires karma-chrome-launcher plugin)
+* **Possible Values:**
+  * `Chrome`
+    * requirements
+      * karma-chrome-launcher plugin
   * `ChromeCanary` (launcher requires karma-chrome-launcher plugin)
-  * `ChromeHeadless` (launcher requires karma-chrome-launcher plugin ^2.1.0)
+  * `ChromeHeadless`
+    * == use Chrome, ❌BUT NOT open browser❌
+    * requirements
+      * karma-chrome-launcher plugin ^2.1.0)
   * `PhantomJS` (launcher requires karma-phantomjs-launcher plugin)
   * `Firefox` (launcher requires karma-firefox-launcher plugin)
   * `Opera` (launcher requires karma-opera-launcher plugin)
   * `IE` (launcher requires karma-ie-launcher plugin)
-  * `Safari` (launcher requires karma-safari-launcher plugin)
+  * `Safari`
+    * requirements
+      * karma-safari-launcher plugin
 
-**Description:** A list of browsers to launch and capture. 
-When Karma starts up, it will also start up each browser which is placed within this setting. Once Karma is shut down, it will shut down these
-browsers as well. 
-You can capture any browser manually by opening the browser and visiting the URL where 
-the Karma web server is listening (by default it is `http://localhost:9876/`).
+* **Description:** 
+  * == browsers / launch & capture 
+    * | start up Karma,
+      * 👀ALSO start up EACH set browser👀
+    * | shut down Karma,
+      * ⚠️ALSO shut down these browsers⚠️ 
+    * if you want 
+      * to capture any browser MANUALLY -> visit the URL | Karma web server is listening (by default http://localhost:9876/)
+      * ADDITIONAL launchers -> define -- through -- [plugins](05-plugins.md)
+      * to override "karma.config"'s `browsers` -> use CL's option `--no-browsers` 
 
-See [config/browsers] for more information.
-Additional launchers can be defined through [plugins]. 
-Use the`--no-browsers` command line option to override the value of this setting specified in the configuration file with an empty list.
-
-
+* [MORE](03-browsers.md)
+ 
 ### captureTimeout
 **Type:** Number
 
@@ -464,22 +475,19 @@ httpsServerOptions: {
 ```
 
 ### logLevel
-**Type:** Constant
-
-**Default:** `config.LOG_INFO`
-
-**CLI:** `--log-level debug`
-
-**Possible values:**
-
+* **Type:**
+  * Constant
+* **Default:**
+  * `config.LOG_INFO`
+* **CLI:**
+  * `--log-level debug`
+* **Possible values:**
   * `config.LOG_DISABLE`
   * `config.LOG_ERROR`
   * `config.LOG_WARN`
   * `config.LOG_INFO`
   * `config.LOG_DEBUG`
-
-**Description:** Level of logging.
-
+* == Level of logging
 
 ### loggers
 **Type:** Array
