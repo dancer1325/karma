@@ -1,0 +1,18 @@
+{
+  "name": "progress",
+  "version": "1.0.0",
+  "description": "* goal   * Karma configuration file's `autoWatch`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.1.0"
+  }
+}

@@ -681,23 +681,25 @@ This is disabled by default (since the default value is 0).
 
 
 ### reporters
-**Type:** Array
 
-**Default:** `['progress']`
+* **Type:**
+  * Array
+* **Default:**
+  * `['progress']`
+* **CLI:**
+  * `--reporters progress,growl`
 
-**CLI:** `--reporters progress,growl`
-
-**Possible Values:**
-
+* **Possible Values:**
   * `dots`
+    * ⚠️ONLY display results | console⚠️
+      * ⚠️NOT | browser⚠️
   * `progress`
+    * ⚠️ONLY display results | console⚠️
+      * ⚠️NOT | browser⚠️
+  * if you use ADDITIONAL ones (`growl`, `junit`, `teamcity` or `coverage`) -> through [plugins](05-plugins.md)
+    * _Example:_ [karma-jasmine-html-reporter](https://github.com/dancer1325/karma-jasmine-html-reporter)
 
-**Description:** A list of reporters to use.
-
-Additional reporters, such as `growl`, `junit`, `teamcity` or `coverage` can be loaded through [plugins].
-
-Note: Just about all additional reporters in Karma (other than progress) require an additional library to be installed (via npm).
-
+* == reporters to use
 
 ### formatError
 **Type:** Function
