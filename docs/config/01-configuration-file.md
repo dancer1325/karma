@@ -68,14 +68,18 @@
 ## Configuration Options
 
 ### autoWatch
-**Type:** Boolean
 
-**Default:**  `true`
+* **Type:**
+  * Boolean
+* **Default:**
+  * `true`
 
-**CLI:** `--auto-watch`, `--no-auto-watch`
+* **CLI:** 
+  * `--auto-watch`
+  * `--no-auto-watch`
 
-**Description:** Enable or disable watching files and executing the tests whenever one of these files changes.
-
+* == enable OR disable watch files
+  * if `true` & SOME file change -> execute the tests 
 
 ### autoWatchBatchDelay
 **Type:** Number
