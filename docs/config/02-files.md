@@ -11,7 +11,7 @@
   * == ⚠️MANDATORY⚠️
 * **Description.**
   * pattern -- for -- matching
-    * [here](#pattern-matching-and-basepath)
+    * [here](#pattern-matching--basepath)
 
 ### `type`
 * **Type.** String
@@ -71,11 +71,10 @@
 - ALL patterns are resolved -- , via [glob](https://github.com/isaacs/node-glob), into -- files 
   - _Examples:_ use [minimatch] expressions: `test/unit/**/*.spec.js`
 
-## Ordering
-- The order of patterns determines the order in which files are included in the browser.
-- Multiple files matching a single pattern are sorted alphabetically.
-- Each file is included exactly once. If multiple patterns match the
-  same file, it's included as if it only matched the first pattern.
+## Ordering of patterns
+- ⚠️-> order / files are included | browser⚠️
+  - EACH file is included 1! == | FIRST match pattern 
+- if >1 files match 1! pattern -> sorted alphabetically
 
 ## Preprocessor transformations
 Depending on preprocessor configuration, be aware that files loaded may be transformed and no longer available in
