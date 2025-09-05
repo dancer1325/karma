@@ -110,29 +110,39 @@ If the browser reconnects during that time, everything is fine.
 
 
 ### browserConsoleLogOptions
-**Type:** Object
-
-**Default:** `{level: "debug", format: "%b %T: %m", terminal: true}`
-
-**Description:** Configure how the browser console is logged with the following
-properties, all of which are optional:
-
-```javascript
-{
-  level:  string,
-  format: string,
-  path:   string,
-  terminal: boolean
-}
-```
-
-
-Here the `level` is the desired log-level, where level `log` always is logged.
-The format is a string where `%b`, `%t`, `%T`, and `%m` are replaced with the browser string,
-log type in lower-case, log type in uppercase, and log message, respectively. 
-This format will only effect the output file. 
-`path` is the output-path of the output-file, and `terminal` indicates if the log should be written in the terminal, or not.
-
+* **Type:** Object
+  ```typescript
+  {
+    level?:  string,
+    format?: string,
+    path?:   string,
+    terminal?: boolean
+  }
+  ```
+  * ALL properties are OPTIONAL
+  * `format?: string,`
+    * == output file's format
+    * `%b`
+      * == browser string,
+    * `%t`
+      * == log type | lower-case
+    * `%T`
+      * == log type | uppercase 
+    * `%m`
+      * == log message
+  * `path?:   string`
+    * output-path of the output-file
+  * `terminal`
+    * if `true` -> write log | terminal
+* **Default:**
+  ```
+  {
+    level: "debug",
+    format: "%b %T: %m",
+    terminal: true
+  }
+  ```
+* == browser console log options
 
 ### browserDisconnectTolerance
 **Type:** Number
