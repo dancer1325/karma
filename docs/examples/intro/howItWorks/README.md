@@ -9,3 +9,4 @@
 
 # how to run?
 * `./node_modules/karma/bin/karma start`
+  * check the IDE's logs
