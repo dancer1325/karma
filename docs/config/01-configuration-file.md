@@ -265,14 +265,24 @@ If true, Karma runs the tests inside the original window without using iframe. I
 
 
 ### client.clearContext
-**Type:** Boolean
 
-**Default:** `true`
+* **Type:**
+  * Boolean
+* **Default:**
+  * `true`
 
-**Description:** Clear the context window
+* == clear the context window
 
-If true, Karma clears the context window upon the completion of running the tests. If false, Karma does not clear the context window
-upon the completion of running the tests. Setting this to false is useful when embedding a Jasmine Spec Runner Template.
+* | complete running the tests,
+  * if `true` -> ⚠️Karma clears the context window upon⚠️
+    * == display TEMPORARY the output test execution
+  * if `false` -> ❌Karma does NOT clear the context window❌
+    * == display ALWAYS the output test execution
+
+* `false`
+  * uses
+    * embed a Jasmine Spec Runner Template
+      * Reason:🧠otherwise, bare difference🧠
 
 ### client.clientDisplayNone
 **Type:** Boolean
